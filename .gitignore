@@ -1,0 +1,19 @@
+# Node (React frontend)
+node_modules/
+
+# Python virtual environment
+venv/
+
+# Environment files
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

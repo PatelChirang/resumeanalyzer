@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen text-gray-900;
+}
+.prose {
+  line-height: 1.8;
+  color: #1a1a1a;
+}
