@@ -127,7 +127,7 @@ function App() {
   </h2>
   <input
     type="file"
-    accept=".pdf"
+    accept=".pdf,.docx,.jpg,.jpeg,.png"
     onChange={handleFileChange}
     className="mt-4 block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 text-gray-900"
   />

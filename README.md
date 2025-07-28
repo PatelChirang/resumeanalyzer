@@ -23,7 +23,7 @@ s
 - 🧠 AI-powered resume and job description analysis
 - ✅ Highlights matching and missing keywords
 - 🌙 Light/Dark mode toggle
-- 📥 Upload PDF resume
+- 📥 Upload PDF,DOCX,JPG,JPEG,PNG resume
 - ⚡ FastAPI backend with React frontend
 - 📊 Visual analysis results with colored highlights
 
