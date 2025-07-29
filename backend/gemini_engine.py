@@ -57,8 +57,9 @@ You are an expert ATS analyzer and resume coach.
 1. Score the resume from 0 to 100 based on how well it matches the job.
 2. List 3-5 positive points (good matches).
 3. List 3-5 negative points (missing or weak areas).
-4. Give 3 improvement suggestions to get closer to 100 ATS score.
-5. Suggest 3 job roles with:
+4. Missing keywords or phrases that could improve ATS score.
+5. Give 3 improvement suggestions to get closer to 100 ATS score.
+6. Suggest 3 job roles with:
    - Job Title
    - Industry/Company Type
    - Expected Salary in INR

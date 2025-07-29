@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { UploadCloud, FileText, BrainCircuit } from 'lucide-react';
 import { marked } from 'marked';
 
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -111,6 +112,9 @@ function App() {
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
       <nav className={`p-4 shadow-md flex items-center justify-between ${darkMode ? 'bg-gray-900 text-white' : 'bg-blue-900 text-white'}`}>
   <h1 className="text-xl font-bold">ResumeAnalyzer 🚀</h1>
+  <h1 className="text-xl font-bold">Build with ❤️ By Chirang</h1>
+  
+
   <button
     onClick={() => setDarkMode(!darkMode)}
     className="bg-white text-gray-900 px-3 py-1 rounded-md text-sm hover:bg-gray-200"
@@ -125,6 +129,7 @@ function App() {
   <h2 className="text-2xl font-semibold flex items-center gap-2">
     <UploadCloud className="w-6 h-6" /> Upload Your Resume (PDF)
   </h2>
+  
   <input
     type="file"
     accept=".pdf,.docx,.jpg,.jpeg,.png"
