@@ -12,9 +12,10 @@ A full-stack application that analyzes your resume against a job description usi
 
 ### 🧠 Analysis Result
 ![Screenshot 2](Screenshots/screenshot2.png)
+![Screenshot 3](Screenshots/screenshot4.png)
 
 ### 🌙 Dark Mode
-![Screenshot 3](Screenshots/screenshot3.png)
+![Screenshot 4](Screenshots/screenshot3.png)
 
 ---
 

@@ -176,15 +176,16 @@ function App() {
           <section className={`p-6 rounded-2xl shadow-md ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
   <h2 className="text-2xl font-semibold mb-4">🧠 Analysis Result</h2>
   <div
-  className={`max-w-none p-6 rounded-lg border ${
+  className={`prose max-w-none p-6 rounded-lg border ${
     darkMode
       ? 'bg-gray-900 text-gray-100 border-gray-700'
       : 'bg-gray-50 text-gray-900 border-gray-200'
-  }`}
+  } prose-h2:text-lg prose-h2:font-bold prose-h2:mt-6 prose-h2:mb-2 prose-strong:text-base`}
   dangerouslySetInnerHTML={{
     __html: marked(highlightMatchingKeywords(analysisResult)),
   }}
 ></div>
+
 
 
 </section>
