@@ -1,3 +1,5 @@
+# main.py
+
 import os
 import shutil
 from fastapi import FastAPI, UploadFile, File, Form
@@ -6,22 +8,13 @@ from backend import resume_parser, gemini_engine
 
 app = FastAPI()
 
-FRONTEND_URLS = [
-    "https://PatelChirang.github.io",  # GitHub Pages frontend
-    # add other deployed frontends here, e.g., Netlify/Vercel domain
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=FRONTEND_URLS + ["http://localhost:3000"],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
 
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -41,6 +34,7 @@ async def analyze_resume(
             "message": f"Unsupported file type: .{ext}. Please upload PDF, DOCX, or image (JPG/PNG) files."
         }
 
+    # Save uploaded file
     file_path = os.path.join(UPLOAD_DIR, file.filename)
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
@@ -48,7 +42,10 @@ async def analyze_resume(
     print(f"[INFO] File uploaded: {file.filename} ({ext})")
 
     try:
+        # Extract resume text
         resume_text = resume_parser.extract_text(file_path)
+
+        # Analyze resume with job description
         analysis_result = gemini_engine.analyze_resume_with_job(
             resume_text=resume_text,
             job_description=job_description
@@ -68,5 +65,6 @@ async def analyze_resume(
         }
 
     finally:
+        # Optional: cleanup uploaded file
         if os.path.exists(file_path):
             os.remove(file_path)

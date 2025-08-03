@@ -41,77 +41,39 @@ function App() {
   };
 
   const handleAnalyze = async () => {
-  if (!resumeFile || !jobDescription.trim()) {
-    alert("Please upload a resume and paste the job description.");
-    return;
-  }
+    if (!resumeFile || !jobDescription.trim()) {
+      alert("Please upload a resume and paste the job description.");
+      return;
+    }
 
-  setIsLoading(true);
-  setAnalysisResult(null);
+    setIsLoading(true);
+    setAnalysisResult(null);
 
-  const formData = new FormData();
-  formData.append("file", resumeFile);
-  formData.append("job_description", jobDescription);
+    const formData = new FormData();
+    formData.append("file", resumeFile);
+    formData.append("job_description", jobDescription);
 
-  // use env var with fallback
-  const backendUrl =
-    process.env.REACT_APP_BACKEND_URL ||
-    "https://resumeanalyzer-backend-ocw2.onrender.com";
-
-  try {
-    const response = await fetch(`${backendUrl}/analyze-resume/`, {
-      method: "POST",
-      body: formData,
-    });
-
-    let result;
     try {
-      result = await response.json();
-    } catch (jsonErr) {
-      console.error("Failed to parse JSON from backend:", jsonErr);
-      const text = await response.text();
-      console.error("Raw response body:", text);
-      alert("Unexpected response format from server."); 
-      return;
+      const response = await fetch("http://127.0.0.1:8000/analyze-resume/", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      console.log("Analysis Result:", result);
+
+      if (result.status === "success") {
+        setAnalysisResult(result.analysis.analysis_result);
+      } else {
+        alert("Error: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error analyzing resume:", error);
+      alert("Error occurred while analyzing.");
+    } finally {
+      setIsLoading(false);
     }
-
-    console.log("Analysis Result Raw:", result);
-
-    if (!response.ok) {
-      alert(
-        `Server returned status ${response.status}: ${
-          result.message || JSON.stringify(result)
-        }`
-      );
-      return;
-    }
-
-    // Normalize where the actual analysis text lives:
-    let analysisText = null;
-    if (result.analysis?.analysis_result) {
-      analysisText = result.analysis.analysis_result;
-    } else if (result.analysis_result) {
-      analysisText = result.analysis_result;
-    } else if (result.analysis) {
-      analysisText = JSON.stringify(result.analysis);
-    }
-
-    if (result.status === "success" && analysisText) {
-      setAnalysisResult(analysisText);
-    } else {
-      console.warn("Unexpected result shape:", result);
-      alert(
-        "Analysis succeeded but response format was unexpected. Check console for details."
-      );
-    }
-  } catch (error) {
-    console.error("Error analyzing resume:", error);
-    alert("Error occurred while analyzing. See console for details.");
-  } finally {
-    setIsLoading(false);
-  }
-};
-
+  };
 
   const highlightMatchingKeywords = (text) => {
   let highlighted = text;
