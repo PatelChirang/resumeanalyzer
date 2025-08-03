@@ -5,3 +5,7 @@ pydantic
 openai
 python-dotenv
 PyMuPDF
+requests
+pytesseract
+Pillow
+docx2txt
